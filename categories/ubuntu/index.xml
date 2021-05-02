@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ubuntu on Learn Or Die</title><link>https://neohsu.github.io/categories/ubuntu/</link><description>Recent content in Ubuntu on Learn Or Die</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://neohsu.github.io/categories/ubuntu/index.xml" rel="self" type="application/rss+xml"/><item><title>Environment Variable on Ubuntu</title><link>https://neohsu.github.io/posts/2011-11-27-environment-variable-on-ubuntu/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://neohsu.github.io/posts/2011-11-27-environment-variable-on-ubuntu/</guid><description>Profile &amp;amp; Environment Difference /etc/profile
+設定所有使用者環境變數的檔案 /etc/environment
+設定本機系统環境變數的檔案 當進入登入畫面時，系統先取得 environment 裡的環境變數執行
+當登錄系統時 shell 讀取環境變數的順序是 :
+/etc/profile =&amp;gt; /etc/environment =&amp;gt; $HOME/.profile
+如果同一個環境變數在使用者環境變數( /etc/profile )和系统環境變數( /etc/environment )有不同的值那應該以使用者的環境變數為主 Environment Variable Document Difference /etc/profile : 此文件為系統的每個用戶設置環境信息，當用戶第一次登錄時，該文件被執行，並從 /etc/profile.d 目錄的配置文件中蒐集 shell 的設置 2. #### /etc/bashrc :
+此文件為每一個運行 bash shell 的用戶執行此文件，當 bash shell 被打開時，該文件被讀入 3. #### ~/.bash_profile :
+每個用戶都可使用該文件輸入專用於自己使用的 shell 信息，當用戶登錄時，該文件僅僅執行一次，默認情況下，他設置一些環境變數，執行用戶的 .bashrc 文件 4. #### ~/.bashrc :
+此文件包含專用於使用者的 bash shell 的 bash 信息，當登錄時以及每次打開新的 shell 時，則該文件被讀取 5.</description></item><item><title>How to Install Octopress on Ubuntu</title><link>https://neohsu.github.io/posts/2011-11-24-how-to-install-octopress-on-ubuntu/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://neohsu.github.io/posts/2011-11-24-how-to-install-octopress-on-ubuntu/</guid><description>Development environment Ubuntu 11.10 64 bit Dell Studio XPS 1640 Installation steps Basic components Git RVM + Bundler Octopress Install basic components $ sudo aptitude install bash curl build-essential bison openssl &amp;lt;br&amp;gt;libreadline6 libreadline6-dev zlib1g zlib1g-dev libssl-dev &amp;lt;br&amp;gt;libyaml-dev libsqlite3-0 libsqlite3-dev sqlite3 libxml2-dev &amp;lt;br&amp;gt;libxslt-dev autoconf libc6-dev ncurses-dev automake Install Git 安裝Git並下載最新版本來重新編譯
+build-dep : 會替你安裝build 所需要的所有package
+$ sudo aptitude build-dep git-core $ wget http://git-core.googlecode.com/files/git-1.7.7.2.tar.gz $ tar xvzf git-1.7.7.2.tar.gz $ cd git-1.</description></item><item><title>How to Install Sun JDK 6 On Ubuntu</title><link>https://neohsu.github.io/posts/2011-11-27-how-to-install-sun-jdk-6-on-ubuntu/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://neohsu.github.io/posts/2011-11-27-how-to-install-sun-jdk-6-on-ubuntu/</guid><description>Outline JDK 提供開發人員的軟體開發工具並建置編譯與執行 JAVA 的開發環境 JDK 包含了 JAVA 開發工具外，還包含了 JRE 和 JVM JDK 可以開發與運行 JAVA 程式 Development environment Ubuntu 11.10 (x86-64) Dell Studio XPS 1640 Method 1: Install a package by a PPA 1.加入新的的PPA來源
+2.Install Sun JDK &amp;amp; Java Plugin
+Method 2: Installing the JDK manually 1.建立你的安裝的目錄並到該目錄下
+2.Downloading JDK from the Oracle Web site ,The file is bin file.
+3.將下載的 JDK 設定為可執行檔案並安裝
+執行完後會在目錄下建立一個資料夾（jdk1.6.0）這個資料夾是你安裝 JDK 的路徑
+4.在 /etc/profile 檔案中設定環境變數</description></item><item><title>How to Install Sun JRE 6 On Ubuntu</title><link>https://neohsu.github.io/posts/2011-11-27-how-to-install-sun-jre-6-on-ubuntu/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://neohsu.github.io/posts/2011-11-27-how-to-install-sun-jre-6-on-ubuntu/</guid><description>Outline JRE 是建置 JAVA 執行環境的軟體 JRE 的內部有一個 Java 虛擬機器（JVM）以及一些標準的類別函數庫，協助 Java 程式運作 JRE 只能運行 JAVA 程式，無法開發 JAVA 程式 Development environment Ubuntu 11.10 (x86-64) Dell Studio XPS 1640 Method 1: Install a package by a PPA 1.加入新的的PPA來源
+2.Install Sun JRE &amp;amp; Java Plugin
+Method 2: Installing the JRE manually 1.建立你要安裝的目錄並到該目錄下
+2.Downloading JRE from the Oracle Web site ,The file is bin file.
+3.將下載的 JRE 設定為可執行的檔案並安裝
+執行完後會在目錄下建立一個資料夾（jre1.6.0）這個資料夾是你安裝 JRE 的路徑</description></item></channel></rss>

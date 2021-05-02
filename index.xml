@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Learn Or Die</title><link>https://neohsu.github.io/</link><description>Recent content on Learn Or Die</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 05 Nov 2014 18:13:58 +0800</lastBuildDate><atom:link href="https://neohsu.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>How to check your internet connection</title><link>https://neohsu.github.io/posts/2014-11-05-how-to-check-your-internet-connection/</link><pubDate>Wed, 05 Nov 2014 18:13:58 +0800</pubDate><guid>https://neohsu.github.io/posts/2014-11-05-how-to-check-your-internet-connection/</guid><description>查詢目前的手機上，是否有網路連線並判斷目前連線的模式，有很多方式可以去做查詢，下面是很多人常用的方式
+上方程式區塊可以查詢到目前網路是否連線並確認連線模式 ( 3G / Wifi ) 後，變回傳相對應的值給 Caller
+但是最近在 Nexus 7 上運行該功能時發生了 Crash 的狀況
+主要原因是在目前 Android 平板裝置上，有些裝置不一定有配置 3G 的模組，因此會在運行到 ConnectivityManager.TYPE_MOBILE 時，因為找不到相關資訊而導致 Crash
+目前我想到的解決方式只能用改變順序的方式去避過這樣的錯誤，靠著先判斷網路連線和 Wifi 狀況而不去使用 TYPE_MOBILE 模式來偵測
+感覺改變順序做法上有點難看，但是還是可以解一下燃眉之急啊！但是由上面例子可以讓我們重新思考，是不是有些例外處理自己沒有做好呢？真改好好反省一下&amp;hellip;</description></item><item><title>Activity LaunchMode</title><link>https://neohsu.github.io/posts/2014-11-03-activity-launchmode/</link><pubDate>Mon, 03 Nov 2014 17:50:23 +0800</pubDate><guid>https://neohsu.github.io/posts/2014-11-03-activity-launchmode/</guid><description>最近遇到 onActivityResult 沒有反應的問題，找了些許資料後才發現原來自己忽略了 Activity 啟動的原點，這邊紀錄一下 Activity 的啟動模式
+Activity 的啟動模式在 androidManifest.xml 中設定
+&amp;lt;activity android:name=&amp;#34;.MainActivity&amp;#34; android:launchMode=&amp;#34;standard&amp;#34;&amp;lt;/activity&amp;gt; Activity LaunchMode standard : 每次 startActivity 都會產生新的 Activity Instance singleTop : 當 startActivity 已經有相同的 Activity Instance 在佇列中，且是 Top 狀態時，不產生新的 Activity Instance singleTask : 所有 startActivity 都會產生唯一的 Activity Instance 並存在於主 Task 中 singleInstance : 當 startActivity 後該 Activity 會存於在和主 Task 不同的 Task 中且 Activity Instance 是唯一的 Standard Example standard 為 Activity LaunchMode 的預設值，如果沒有設定 LaunchMode 就會以 standard 來運行 使用 Standard 運作原理如下</description></item><item><title>How to fix Octopress build warning Layout nil requested</title><link>https://neohsu.github.io/posts/2014-11-01-how-to-fix-octopress-build-warning-layout-nil-requested/</link><pubDate>Sat, 01 Nov 2014 18:29:26 +0800</pubDate><guid>https://neohsu.github.io/posts/2014-11-01-how-to-fix-octopress-build-warning-layout-nil-requested/</guid><description>想要將之前寫的文章重新 Build 成靜態網頁的時候發生了錯誤，主要原因應該是對於 nill 值無法判定導致錯誤的問題，只要將有出現錯誤的檔案將 nill 改成 null 即可
+Fix this error by replacing from file:
+layout: nil
+with:
+layout: null
+in files:
+source/atom.xml source/_includes/custom/category_feed.xml</description></item><item><title>HowTo: ListView Optimization About Custom Adapter and Layout</title><link>https://neohsu.github.io/posts/2013-12-13-howto-listview-optimization-about-custom-adapter-and-layout/</link><pubDate>Fri, 13 Dec 2013 23:08:46 +0800</pubDate><guid>https://neohsu.github.io/posts/2013-12-13-howto-listview-optimization-about-custom-adapter-and-layout/</guid><description>Adapter 的作用就是 ListView 與資料之間的橋樑，當 ListView 中每一個 Item 顯示到螢幕上時，都會調用 Adapter 的 getView 方法返回一個View，因此當 ListView 在處理 Scroll 事件時，會反覆的調用 getView 方法去顯示頁面，使頁面不斷的重複建立相同的 View ，因此會產生記憶體不足而導致閃退或是滾動不夠順暢的狀況；由此可見我們應該要在調用 getView 方法時做些優化，以增進 ListView 的效能
+ListView 優化的思路整理以下兩種：
+View 的重復使用：
+View 每次創建是比較耗費時間的動作，因此對於 getView 方法傳入的 converView 應該充分利用 Null 的判斷 ViewHolder 的應用：
+View 在調用 findViewById 方法也是比較耗時的，因此需要考慮只調用一次，之後就調用 View.getTag 方法來取得 ViewHolder 物件 BaseAdapter Example 繼承 BaseAdapter 之後需要重寫四個方法：getCount，getItem，getItemId 和 getView
+BaseAdapter 一開始會先調用 getCount 來計算將會顯示的 Item 數，因此我們需先回傳該值 為了反覆取用之前已建立過的 View，我們利用 ViewHolder 保存已建立的 View；這邊可以存取 Item 中所顯示的元件 當 BaseAdapter 調用 getView 時，我們可以從 converView 中確認 View 是否存在，如果存在則從 ViewHolder 中取出，如果未存在則建立新的 View 並設定 tag 記錄已建立過；當指定好 Holder 後，便利用 Holder 去執行所需要的配置與相對應的事件了 BaseAdapter 完整範例的原始碼 GitHub - NeoHsu/CustomListViewWithBaseAdapter</description></item><item><title>Talk About ListView Adapter on Android</title><link>https://neohsu.github.io/posts/2013-12-12-talk-about-listview-and-adapter-on-android/</link><pubDate>Thu, 12 Dec 2013 23:02:24 +0800</pubDate><guid>https://neohsu.github.io/posts/2013-12-12-talk-about-listview-and-adapter-on-android/</guid><description>在 Android 開發過程中，ListView 和 Adapter 有著密不可分的關係；Adapter 主要負責 Data 和 ListView 之間資料配置與 Layout 佈局的媒介，因此在實作 Custom ListView 時，常會針對 Adapter 組件去做客製化的設計；下面將介紹 Adapter 和 ListView 之間的運作原理並說明不同資料形態的 Adapter 運作模式
+{% img /images/SVG/0-talk-about-listview-and-adapter-on-android.png %}
+一般而言 ListView 是由以下三個元素所组成，
+View：
+用來顯示 ListView 中每一個 Item 所要呈現的配置 Adapter：
+將不同的資料對應到 View 中，不同的資料使用不同的 Adapter 去做對應，如 ArrayAdapter，CursorAdapter，SimpleAdapter 等，Adapter 會將資料對應到 ListView Item 的 View 中來呈現資料 Data：
+Adapter 所需要對應的資料來源，資料形態可以是字串或圖片，儲存資料的媒介可以是 ArrayList 或 Cursor 並透過 Adapter 將資料放到 Item 中；所有的資料會顯示到 ListView 上都是透過 Adapter 來完成 根據上圖我們可以知道當使用 ListView 時，我們會先將要放入 ListView 的資料丟入 Adapter 中， Adapter 透過 XML 中 Layout 的佈局去配置每個 Item 的樣式與資料，最後再將配置好的佈局放入 ListView 中呈現出我們所設定的樣式；事實上系統已有預設的 Adapter 可以運用，但有時候並不能滿足我們的需求，因此要實現複雜的 ListView 可以透過繼承 Adapter 並重寫相對應的方法即可；以下將介紹一下透過不同 Adapter 的運作過程</description></item><item><title>Talk About View Component On Android</title><link>https://neohsu.github.io/posts/2013-12-11-talk-about-view-component-on-android/</link><pubDate>Wed, 11 Dec 2013 22:51:29 +0800</pubDate><guid>https://neohsu.github.io/posts/2013-12-11-talk-about-view-component-on-android/</guid><description>{% img /images/SVG/1-talk-about-view-component-on-android.svg %}
+在 Android 開發中，我認為了解 View 的執行過程有助於提高介面呈現的效率，可以幫助一些複雜 Layout 在適當的時機中處理，或是可以減少不必要的畫面重製，這些都是對於 View 的執行過程有很大的關聯
+Android 中 View 的呈現主要經過 Mesure, Layout 和 Draw 這三個過程：
+Mesure 此階段主要是負責計算 view 佔用的大小，簡單的說就是將 match_parent 和 wrap_content 轉成目前顯示的實際大小；透過 onMeasure(widthMeasureSpec, heightMeasureSpec) 方法去處理計算 View 在目前螢幕上顯示的區塊大小
+View 的大小是有 Parent View 和自己的大小决定而不是單一個 View 來决定，因此需要配合自己的 Sub-View 去做計算調整
+Layout 當 View 配置好大小後，便讀取設定好的 Layout 配置，將 Layout 佈局放到建立好的 View 中並計算出 View 在螢幕上的座標；透過 onLayout(int l, int t, int r, int b )方法去處理
+處理組件的佈局通常要重寫 onMesure 和 onLayout 這兩個方法</description></item><item><title>Error : ADB Server didn't ACK on Windows</title><link>https://neohsu.github.io/posts/2013-11-28-solve-adb-server-didnt-ack-on-windows/</link><pubDate>Thu, 28 Nov 2013 23:40:27 +0800</pubDate><guid>https://neohsu.github.io/posts/2013-11-28-solve-adb-server-didnt-ack-on-windows/</guid><description>Outline 產生ADB Server didn&amp;rsquo;t ACK 問題的主要原因為 ADB Server 的 Port 绑定失败，因此只需要關閉 Adb Server 所需綁定的 Port 上佔用的程序即可；我是在使用 Windows 系統時，自動啟動的 QQ 即時通訊軟體使 ADB Server 需綁定的 Port 被佔用，因此產生此問題
+Quit Eclipse &amp;amp; Open Command Line 關閉 Eclipse 使 android 的 adb與Eclipse 間的連結關閉，並打開 commad line ，切換目錄到 Android SDK 目錄中 platform-tools 資料夾裡
+切換到 platform-tools 資料夾中是為了使用 adb 工具，如果有有將 platform-tools 資料夾路徑加到環境變數中可以不需要切換
+Turn Off ADB Server &amp;amp; Turn On ADB Server Again 關閉並重新啟動 ADB Server
+IF Failed To Start ADB Server 如果前面步驟還沒成功啓動 ADB Server ，則需要查詢有哪些程序佔用了 ADB Server 的 port</description></item><item><title>Setup Octopress under Mac OS X</title><link>https://neohsu.github.io/posts/2013-11-28-setup-octopress-under-mac-os-x/</link><pubDate>Thu, 28 Nov 2013 21:30:08 +0800</pubDate><guid>https://neohsu.github.io/posts/2013-11-28-setup-octopress-under-mac-os-x/</guid><description>Outline 在 Mac 上建置 Octopress 環境撰寫 Blog 安裝 Mac 的第三方套件庫 ( Homebrew ) 建置 Ruby 環境 Install Homebrew &amp;amp; Ruby Install Homebrew Homebrew 是一套在 Mac OS X 下使用的套件管理工具，以往大家會使用 Mac Ports ，但是 Port 的套件相依性太深，常常會為了裝個小套件而跟著裝上一堆用不到的相依套件； Homebrew 則盡量依賴系統內已經有的套件、它的套件 formula 是用簡單的 Ruby 寫的，所以你可以 fork Homebrew repository 自行修改維護、它自己用 Git 管理自己，升級十分方便；Homebrew 安裝好套件後不會幫你做 symlink 到 /usr/local ，避免你的原生系統內還有相同的套件因而不相容而打架
+Use Homebrew Install rbenv &amp;amp; ruby-build rbenv 是用來管理 Ruby 版本控制的工具，ruby-build 則是用來編譯安裝 Ruby
+Add Environment Variables 設定 rbenv 的路徑並確保有 rbenv 工具；依照你使用的環境去設定各自的環境變數 ( zprofile / bash_profile )</description></item><item><title>Environment Variable on Ubuntu</title><link>https://neohsu.github.io/posts/2011-11-27-environment-variable-on-ubuntu/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://neohsu.github.io/posts/2011-11-27-environment-variable-on-ubuntu/</guid><description>Profile &amp;amp; Environment Difference /etc/profile
+設定所有使用者環境變數的檔案 /etc/environment
+設定本機系统環境變數的檔案 當進入登入畫面時，系統先取得 environment 裡的環境變數執行
+當登錄系統時 shell 讀取環境變數的順序是 :
+/etc/profile =&amp;gt; /etc/environment =&amp;gt; $HOME/.profile
+如果同一個環境變數在使用者環境變數( /etc/profile )和系统環境變數( /etc/environment )有不同的值那應該以使用者的環境變數為主 Environment Variable Document Difference /etc/profile : 此文件為系統的每個用戶設置環境信息，當用戶第一次登錄時，該文件被執行，並從 /etc/profile.d 目錄的配置文件中蒐集 shell 的設置 2. #### /etc/bashrc :
+此文件為每一個運行 bash shell 的用戶執行此文件，當 bash shell 被打開時，該文件被讀入 3. #### ~/.bash_profile :
+每個用戶都可使用該文件輸入專用於自己使用的 shell 信息，當用戶登錄時，該文件僅僅執行一次，默認情況下，他設置一些環境變數，執行用戶的 .bashrc 文件 4. #### ~/.bashrc :
+此文件包含專用於使用者的 bash shell 的 bash 信息，當登錄時以及每次打開新的 shell 時，則該文件被讀取 5.</description></item><item><title>How to Install Octopress on Ubuntu</title><link>https://neohsu.github.io/posts/2011-11-24-how-to-install-octopress-on-ubuntu/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://neohsu.github.io/posts/2011-11-24-how-to-install-octopress-on-ubuntu/</guid><description>Development environment Ubuntu 11.10 64 bit Dell Studio XPS 1640 Installation steps Basic components Git RVM + Bundler Octopress Install basic components $ sudo aptitude install bash curl build-essential bison openssl &amp;lt;br&amp;gt;libreadline6 libreadline6-dev zlib1g zlib1g-dev libssl-dev &amp;lt;br&amp;gt;libyaml-dev libsqlite3-0 libsqlite3-dev sqlite3 libxml2-dev &amp;lt;br&amp;gt;libxslt-dev autoconf libc6-dev ncurses-dev automake Install Git 安裝Git並下載最新版本來重新編譯
+build-dep : 會替你安裝build 所需要的所有package
+$ sudo aptitude build-dep git-core $ wget http://git-core.googlecode.com/files/git-1.7.7.2.tar.gz $ tar xvzf git-1.7.7.2.tar.gz $ cd git-1.</description></item><item><title>How to Install Sun JDK 6 On Ubuntu</title><link>https://neohsu.github.io/posts/2011-11-27-how-to-install-sun-jdk-6-on-ubuntu/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://neohsu.github.io/posts/2011-11-27-how-to-install-sun-jdk-6-on-ubuntu/</guid><description>Outline JDK 提供開發人員的軟體開發工具並建置編譯與執行 JAVA 的開發環境 JDK 包含了 JAVA 開發工具外，還包含了 JRE 和 JVM JDK 可以開發與運行 JAVA 程式 Development environment Ubuntu 11.10 (x86-64) Dell Studio XPS 1640 Method 1: Install a package by a PPA 1.加入新的的PPA來源
+2.Install Sun JDK &amp;amp; Java Plugin
+Method 2: Installing the JDK manually 1.建立你的安裝的目錄並到該目錄下
+2.Downloading JDK from the Oracle Web site ,The file is bin file.
+3.將下載的 JDK 設定為可執行檔案並安裝
+執行完後會在目錄下建立一個資料夾（jdk1.6.0）這個資料夾是你安裝 JDK 的路徑
+4.在 /etc/profile 檔案中設定環境變數</description></item><item><title>How to Install Sun JRE 6 On Ubuntu</title><link>https://neohsu.github.io/posts/2011-11-27-how-to-install-sun-jre-6-on-ubuntu/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://neohsu.github.io/posts/2011-11-27-how-to-install-sun-jre-6-on-ubuntu/</guid><description>Outline JRE 是建置 JAVA 執行環境的軟體 JRE 的內部有一個 Java 虛擬機器（JVM）以及一些標準的類別函數庫，協助 Java 程式運作 JRE 只能運行 JAVA 程式，無法開發 JAVA 程式 Development environment Ubuntu 11.10 (x86-64) Dell Studio XPS 1640 Method 1: Install a package by a PPA 1.加入新的的PPA來源
+2.Install Sun JRE &amp;amp; Java Plugin
+Method 2: Installing the JRE manually 1.建立你要安裝的目錄並到該目錄下
+2.Downloading JRE from the Oracle Web site ,The file is bin file.
+3.將下載的 JRE 設定為可執行的檔案並安裝
+執行完後會在目錄下建立一個資料夾（jre1.6.0）這個資料夾是你安裝 JRE 的路徑</description></item><item><title>Tag cloud for Octopress</title><link>https://neohsu.github.io/posts/2012-06-27-tag-cloud-for-octopress/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://neohsu.github.io/posts/2012-06-27-tag-cloud-for-octopress/</guid><description>Octopress的預設畫面沒有將分類標籤獨立出來，讓搜尋文章類別很不方便，因此標籤雲這東西就相對的重要，網路上找了一下相關的plugin，以下說明一下安裝與設定過程。
+Installation steps Download plugin Move file Edit config Compile octopress Download plugin 下載Plugin相關檔案 GitHub - tokkonopapa/octopress-tagcloud Plugin相關檔案 Move file 將檔案移動到Octopress對應的位置
+Edit config 編輯_config.ymldefault_asides 是設定Blog側邊欄所要放置的模板，我選擇了tag_cloud.html去作類別的顯示；
+使用的模板位置 custom/asides/tag_cloud.html</description></item></channel></rss>
