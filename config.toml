@@ -1,4 +1,13 @@
-baseURL = "http://example.org/"
+baseURL = "https://neohsu.github.io/"
 languageCode = "en-us"
-title = "My New Hugo Site"
+title = "Learn Or Die"
 theme = "hyde"
+
+[Menus]
+  main = [
+      {Name = "GitHub", URL = "https://github.com/neohsu"}
+  ]
+
+[params]
+  themeColor = "theme-base-09"
+  description = "Code wins arguments."
