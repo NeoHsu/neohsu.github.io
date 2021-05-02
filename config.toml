@@ -11,3 +11,4 @@ theme = "hyde"
 [params]
   themeColor = "theme-base-09"
   description = "Code wins arguments."
+  avatarURL = "http://www.gravatar.com/avatar/a6974d6335aac6400019a5bd307aeca8?s=200"
