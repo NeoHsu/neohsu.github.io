@@ -5,7 +5,10 @@ theme = "hyde"
 
 [Menus]
   main = [
-      {Name = "GitHub", URL = "https://github.com/neohsu"}
+      {Name = "github", URL = "https://github.com/neohsu"},
+      {Name = "facebook", URL = "https://www.facebook.com/NeoHsuDroid"},
+      {Name = "twitter", URL = "https://twitter.com/neohsudroid"},
+      {Name = "linkedin", URL = "https://www.linkedin.com/in/neohsu"}
   ]
 
 [params]

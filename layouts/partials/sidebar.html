@@ -12,7 +12,7 @@
       <ul class="sidebar-nav">
         <li><a href="{{ .Site.BaseURL }}">Home</a> </li>
         {{ range .Site.Menus.main -}}
-          <li><a href="{{.URL}}"> {{ .Name }} </a></li>
+          <a href="{{.URL}}"><i class="fab fa-{{ .Name }}" style="margin-right: 0.5rem"></i></a>
         {{- end }}
       </ul>
     </nav>
