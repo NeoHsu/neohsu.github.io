@@ -9,7 +9,7 @@ categories:
 <p></p>
 # ListView & Adapter
 
-{% img /images/SVG/0-talk-about-listview-and-adapter-on-android.png %}
+![talk-about-listview-and-adapter-on-android](/images/0-talk-about-listview-and-adapter-on-android.png)
 
 一般而言 ListView 是由以下三個元素所组成，  
 
@@ -35,13 +35,13 @@ Adapter 所需要對應的資料來源，資料形態可以是字串或圖片，
 
 ## BaseAdapter
 
-{% img /images/SVG/1-talk-about-listview-and-adapter-on-android.svg %}
+![talk-about-listview-and-adapter-on-android](/images/1-talk-about-listview-and-adapter-on-android.svg)
 
 根據上圖我們可以知道 BaseAdapter 的運作模式，當 ListView 受到 Scroll 事件響應的時候，ListView 會先調用 getCount 去和後端資料取得 Item 個數，並調用 getView 方法去繪製每個要呈現的 Item View ；如果要取得某一列的內容就會調用 getItem 這個方法；如要取得某一列的 Id 就可以調用 getItemId 方法去實現
 
 ## CursorAdapter
 
-{% img /images/SVG/2-talk-about-listview-and-adapter-on-android.svg %}
+![talk-about-listview-and-adapter-on-android](/images/2-talk-about-listview-and-adapter-on-android.svg)
 
 由上圖可以看出使用 CursorAdapter 時，當 ListView 產生 Scroll 事件後，會去取得目前 Cursor 位置，如果顯示的 Item 需要被繪製 View 的時候，會調用 newView 去繪製 Item ，如果不需要重新繪製則調用 bindView 去做顯示的動作
 

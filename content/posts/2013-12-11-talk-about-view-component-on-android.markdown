@@ -5,7 +5,7 @@ categories:
 - Android
 ---
 
-{% img /images/SVG/1-talk-about-view-component-on-android.svg %}
+![talk-about-view-component-on-android](/images/1-talk-about-view-component-on-android.svg)
 
 在 Android 開發中，我認為了解 View 的執行過程有助於提高介面呈現的效率，可以幫助一些複雜 Layout 在適當的時機中處理，或是可以減少不必要的畫面重製，這些都是對於 View 的執行過程有很大的關聯
 
