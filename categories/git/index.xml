@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Git on Learn Or Die</title><link>https://neohsu.github.io/categories/git/</link><description>Recent content in Git on Learn Or Die</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 10 May 2021 17:00:00 +0800</lastBuildDate><atom:link href="https://neohsu.github.io/categories/git/index.xml" rel="self" type="application/rss+xml"/><item><title>IncludeIf of Git Config</title><link>https://neohsu.github.io/posts/2021-05-10-git-config-includeif/</link><pubDate>Mon, 10 May 2021 17:00:00 +0800</pubDate><guid>https://neohsu.github.io/posts/2021-05-10-git-config-includeif/</guid><description>不知道大家怎麼管理自己不同 gitconfig 的設定呢？
+舉例來說通常我們 git clone 後，要在修改後的 code 做 git commit 以前都需要做下列設定
+$ git config user.name &amp;quot;Neo Hsu&amp;quot; $ git config user.email &amp;quot;NeoHsuDroid@gmail.com&amp;quot; 該指令會在我們 git clone repo 的目錄內設定 gitconfig 的 name, email，
+我們在設定了基本資訊後才能做 git commit 的後續動作，
+但當我們要抓多個 repo 下來時，每次都要做這動作感覺很費時又多指令， 因此很多使用者會將該 gitconfig 設定成 global 來減少各自設定 gitconfig 的操作
+$ git config --global user.name &amp;quot;Neo Hsu&amp;quot; $ git config --global user.email &amp;quot;NeoHsuDroid@gmail.com&amp;quot; 也許上面的作法可以暫時解決了每次 git clone 下來後不用再次設定的問題，
+但如果你擁有兩個 gitconfig 要做切換時又該怎麼處理呢，
+舉例來說目前你需要設定兩組 git config，
+personal gitconfig company gitconfig 某些 repo 需要各別設定 personal gitconfig 或 company gitconfig 的狀況下，</description></item></channel></rss>
