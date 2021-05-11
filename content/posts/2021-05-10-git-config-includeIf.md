@@ -1,5 +1,5 @@
 ---
-title: "IncludeIf of Git Config"
+title: "IncludeIf of Git config"
 date: 2021-05-10 17:00:00 +0800
 categories:
 - Git

@@ -4,7 +4,6 @@ date: 2011-11-24 01:54
 categories:
 - Ubuntu
 - Octopress
-
 ---
 
 # Development environment

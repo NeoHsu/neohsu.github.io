@@ -1,5 +1,5 @@
 ---
-title: "HowTo: ListView Optimization About Custom Adapter and Layout"
+title: "How about listView optimization adapter and layout of custom"
 date: 2013-12-13 23:08:46 +0800
 categories:
 - Android

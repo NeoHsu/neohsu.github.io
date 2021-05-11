@@ -1,5 +1,5 @@
 ---
-title: "How to fix Octopress build warning Layout nil requested"
+title: "How to fix build warning layout nil requested on Octopress"
 date: 2014-11-01 18:29:26 +0800
 categories:
 - Octopress

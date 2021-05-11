@@ -1,5 +1,5 @@
 ---
-title: "Talk About View Component On Android"
+title: "Talk about view component on Android"
 date: 2013-12-11 22:51:29 +0800
 categories: 
 - Android
