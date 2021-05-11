@@ -1,3 +1,18 @@
 baseURL = "https://neohsu.github.io/"
-languageCode = "en-us"
-title = "My New Hugo Site"
+languageCode = "zh-tw"
+DefaultContentLanguage = "zh-tw"
+theme = "anatole"
+summarylength = 5
+enableEmoji = true
+enableRobotsTXT = true
+
+# Syntax highlighting
+pygmentsUseClasses = true
+pygmentsCodeFences = true
+pygmentsCodefencesGuessSyntax = true
+
+[params]
+profilePicture = "http://www.gravatar.com/avatar/a6974d6335aac6400019a5bd307aeca8?s=500"
+title = "Learn Or Die"
+author = "Neo Hsu"
+description = "Code wins arguments."
