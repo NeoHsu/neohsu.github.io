@@ -11,8 +11,37 @@ pygmentsUseClasses = true
 pygmentsCodeFences = true
 pygmentsCodefencesGuessSyntax = true
 
+[Menus]
+main = [
+    {Name = "Home", URL = "/"},
+    {Name = "Posts", URL = "/posts/"}
+]
+
 [params]
 profilePicture = "http://www.gravatar.com/avatar/a6974d6335aac6400019a5bd307aeca8?s=500"
 title = "Learn Or Die"
 author = "Neo Hsu"
 description = "Code wins arguments."
+readMore = true
+contentratio = 0.7
+
+## Social links
+[[params.socialIcons]]
+icon = "fab fa-github"
+title = "GitHub"
+url = "https://github.com/neohsu"
+
+[[params.socialIcons]]
+icon = "fab fa-linkedin"
+title = "Linkedin"
+url = "https://www.linkedin.com/in/neohsu"
+
+[[params.socialIcons]]
+icon = "fab fa-facebook"
+title = "Facebook"
+url = "https://www.facebook.com/NeoHsuDroid"
+
+[[params.socialIcons]]
+icon = "fab fa-twitter"
+title = "Twitter"
+url = "https://twitter.com/neohsudroid"
