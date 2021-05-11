@@ -1,17 +1,3 @@
 baseURL = "https://neohsu.github.io/"
 languageCode = "en-us"
-title = "Learn Or Die"
-theme = "hyde"
-
-[Menus]
-  main = [
-      {Name = "github", URL = "https://github.com/neohsu"},
-      {Name = "facebook", URL = "https://www.facebook.com/NeoHsuDroid"},
-      {Name = "twitter", URL = "https://twitter.com/neohsudroid"},
-      {Name = "linkedin", URL = "https://www.linkedin.com/in/neohsu"}
-  ]
-
-[params]
-  themeColor = "theme-base-09"
-  description = "Code wins arguments."
-  avatarURL = "http://www.gravatar.com/avatar/a6974d6335aac6400019a5bd307aeca8?s=200"
+title = "My New Hugo Site"
