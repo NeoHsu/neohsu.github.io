@@ -5,6 +5,7 @@ theme = "anatole"
 summarylength = 5
 enableEmoji = true
 enableRobotsTXT = true
+favicon = "favicons/"
 
 # Syntax highlighting
 pygmentsUseClasses = true
@@ -24,6 +25,7 @@ author = "Neo Hsu"
 description = "Code wins arguments."
 readMore = true
 contentratio = 0.7
+displayMode = "dark"
 
 ## Social links
 [[params.socialIcons]]
