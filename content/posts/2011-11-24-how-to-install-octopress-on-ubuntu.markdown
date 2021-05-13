@@ -1,6 +1,6 @@
 ---
 title: "How to Install Octopress on Ubuntu"
-date: 2011-11-24 01:54
+date: 2011-11-24 01:54:00 +0800
 categories:
 - Ubuntu
 - Octopress

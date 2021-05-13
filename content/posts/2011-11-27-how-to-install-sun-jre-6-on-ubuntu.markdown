@@ -1,6 +1,6 @@
 ---
 title: "How to install Sun JRE 6 On Ubuntu"
-date: 2011-11-27 15:10
+date: 2011-11-27 15:10:00 +0800
 categories:
 - Ubuntu
 - Java

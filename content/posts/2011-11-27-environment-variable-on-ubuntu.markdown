@@ -1,6 +1,6 @@
 ---
 title: "Environment Variable on Ubuntu"
-date: 2011-11-27 17:37
+date: 2011-11-27 17:37:00 +0800
 categories:
 - Ubuntu
 ---

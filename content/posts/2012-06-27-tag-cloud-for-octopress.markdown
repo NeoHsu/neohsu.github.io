@@ -1,6 +1,6 @@
 ---
 title: "Tag cloud for Octopress"
-date: 2012-06-27 16:10
+date: 2012-06-27 16:10:00 +0800
 categories:
 - Octopress
 ---

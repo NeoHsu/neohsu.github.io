@@ -1,6 +1,6 @@
 ---
 title: "How to install Sun JDK 6 On Ubuntu"
-date: 2011-11-27 00:52
+date: 2011-11-27 00:52:00 +0800
 categories:
 - Ubuntu
 - Java
