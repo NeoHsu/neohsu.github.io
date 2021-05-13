@@ -1,0 +1,48 @@
+<!doctype html><html dir=ltr lang=zh-tw data-theme=dark><head><title>Neo Hsu | Strings Split of Go</title><meta charset=utf-8><meta name=generator content="Hugo 0.83.1"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name=description content="Code wins arguments."><meta name=google-site-verification content="t0qlhlMvK4AFx4Vuu3778mSjl4ymmiLNZjx14mJ7u2Q"><link rel=stylesheet href=/css/main.min.b29fc5408bdb71afaf8c3736989fad5b879056ad6ee964a41a4cb79f2b5b381e.css integrity="sha256-sp/FQIvbca+vjDc2mJ+tW4eQVq1u6WSkGky3nytbOB4=" crossorigin=anonymous type=text/css><link rel=stylesheet href=/css/markupHighlight.min.f798cbda9aaa38f89eb38be6414bd082cfd71a6780375cbf67b6d2fb2b96491e.css integrity="sha256-95jL2pqqOPies4vmQUvQgs/XGmeAN1y/Z7bS+yuWSR4=" crossorigin=anonymous type=text/css><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin=anonymous><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=canonical href=/posts/2021-05-13-strings-split-of-go/><script type=text/javascript src=/js/anatole-header.min.0c05c0a90d28c968a1cad4fb31abd0b8e1264e788ccefed022ae1d3b6f627514.js integrity="sha256-DAXAqQ0oyWihytT7MavQuOEmTniMzv7QIq4dO29idRQ=" crossorigin=anonymous></script><script type=text/javascript src=/js/anatole-theme-switcher.min.7fd87181cdd7e8413aa64b6867bb32f3a8dc242e684fc7d5bbb9f600dbc2b6eb.js integrity="sha256-f9hxgc3X6EE6pktoZ7sy86jcJC5oT8fVu7n2ANvCtus=" crossorigin=anonymous></script><meta name=twitter:card content="summary"><meta name=twitter:title content="Strings Split of Go"><meta name=twitter:description content="最近遇到用 Golang 將字串拆解成 slices 的小陷阱， 在開發上大家有時候會需要拆解字串變成 slices 的應用， 例如 input 資料是一串文章的分類 Golang,Docker,Kubernetes,Nats，我們希望 output 一個分類的 slices 之後再做處理運算， 此時可能會是這樣處理"></head><body><div class="sidebar animated fadeInDown"><div class=logo-title><div class=title><img src="http://www.gravatar.com/avatar/a6974d6335aac6400019a5bd307aeca8?s=500" alt="profile picture"><h3 title><a href=/>Learn Or Die</a></h3><div class=description><p>Code wins arguments.</p></div></div></div><ul class=social-links><li><a href=https://github.com/neohsu rel=me aria-label=GitHub><i class="fab fa-github fa-2x" aria-hidden=true></i></a></li><li><a href=https://www.linkedin.com/in/neohsu rel=me aria-label=Linkedin><i class="fab fa-linkedin fa-2x" aria-hidden=true></i></a></li><li><a href=https://www.facebook.com/NeoHsuDroid rel=me aria-label=Facebook><i class="fab fa-facebook fa-2x" aria-hidden=true></i></a></li><li><a href=https://twitter.com/neohsudroid rel=me aria-label=Twitter><i class="fab fa-twitter fa-2x" aria-hidden=true></i></a></li></ul><div class=footer><div class=by_farbox>&copy; Neo Hsu 2021</div></div></div><div class=main><div class="page-top animated fadeInDown"><a role=button class=navbar-burger data-target=navMenu aria-label=menu aria-expanded=false><span aria-hidden=true></span><span aria-hidden=true></span><span aria-hidden=true></span></a><ul class=nav id=navMenu><li><a href=/ title>Home</a></li><li><a href=/posts/ title>Posts</a></li><li class=theme-switch-item><a class=theme-switch title="Switch Theme"><i class="fas fa-adjust fa-fw" aria-hidden=true></i></a></li></ul></div><div class=autopagerize_page_element><div class=content><div class="post animated fadeInDown"><div class=post-content><div class=post-title><h3>Strings Split of Go</h3></div><p>最近遇到用 Golang 將字串拆解成 slices 的小陷阱，
+在開發上大家有時候會需要拆解字串變成 slices 的應用，
+例如 input 資料是一串文章的分類 <code>Golang,Docker,Kubernetes,Nats</code>，我們希望 output 一個分類的 slices 之後再做處理運算，
+此時可能會是這樣處理</p><div class=highlight><pre class=chroma><code class=language-fallback data-lang=fallback>    input := &#34;Golang,Docker,Kubernetes,Nats&#34;
+    categories := strings.Split(input, &#34;,&#34;)
+    fmt.Println(len(categories))
+</code></pre></div><p>此段程式運作後會印出 4, 表示從 input 字串中拆解出 4 的項目，
+感覺上很直覺但是陷阱這之中，</p><p>當我們將 input 賦予空字串後，最後得到的輸出卻是 1 ，
+明明沒有資料為什麼還會給予 1 個元素的 slices 呢？
+跑去看了一下 <a href=https://golang.org/pkg/strings/#Split>Golang 官方文件</a> 說明</p><div class=highlight><pre class=chroma><code class=language-fallback data-lang=fallback>Split slices s into all substrings separated by sep and returns a slice of the substrings between those separators.
+
+If s does not contain sep and sep is not empty, Split returns a slice of length 1 whose only element is s.
+
+If sep is empty, Split splits after each UTF-8 sequence. If both s and sep are empty, Split returns an empty slice.
+
+It is equivalent to SplitN with a count of -1.
+</code></pre></div><p>原來當 sep 是空的時候他會回傳 一個空字串的 slice，
+追了一下 source code 主要是他 make 了一個 []string{} slice 導致</p><div class=highlight><pre class=chroma><code class=language-fallback data-lang=fallback>// Generic split: splits after each instance of sep,
+// including sepSave bytes of sep in the subarrays.
+func genSplit(s, sep string, sepSave, n int) []string {
+	if n == 0 {
+		return nil
+	}
+	if sep == &#34;&#34; {
+		return explode(s, n)
+	}
+	if n &lt; 0 {
+		n = Count(s, sep) + 1
+	}
+
+	a := make([]string, n)
+	n--
+	i := 0
+	for i &lt; n {
+		m := Index(s, sep)
+		if m &lt; 0 {
+			break
+		}
+		a[i] = s[:m+sepSave]
+		s = s[m+len(sep):]
+		i++
+	}
+	a[i] = s
+	return a[:i+1]
+}
+</code></pre></div><p>上面過程可以知道當 input 是空的時候他會 make 一塊空字串的 slice 去準備執分割後塞入，
+因此會有上面說的狀況，
+提供給有需要使用 strings.Split function 的人可以留意一下</p></div><div class=post-footer><div class=info><span class=separator><a class=category href=/categories/golang/>Golang</a></span></div></div></div></div></div></div><script type=text/javascript src=/js/medium-zoom.min.83cb1dd5fea8d42d87d1e601a07faa73089ad0ef9ccfe5daf6041289ebcc4e46.js integrity="sha256-g8sd1f6o1C2H0eYBoH+qcwia0O+cz+Xa9gQSievMTkY=" crossorigin=anonymous></script></body></html>
