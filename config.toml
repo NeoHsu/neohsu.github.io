@@ -27,6 +27,7 @@ readMore = true
 contentratio = 0.7
 displayMode = "dark"
 googleSiteVerify="t0qlhlMvK4AFx4Vuu3778mSjl4ymmiLNZjx14mJ7u2Q"
+disableComments = false
 
 ## Social links
 [[params.socialIcons]]
@@ -48,3 +49,8 @@ url = "https://www.facebook.com/NeoHsuDroid"
 icon = "fab fa-twitter"
 title = "Twitter"
 url = "https://twitter.com/neohsudroid"
+
+[params.utterances]
+repo = "NeoHsu/neohsu.github.io"
+issueTerm = "pathname"
+theme= "github-dark"
