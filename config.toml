@@ -15,7 +15,7 @@ pygmentsCodefencesGuessSyntax = true
 [Menus]
 main = [
     {Name = "Home", URL = "/"},
-    {Name = "Posts", URL = "/posts/"}
+    {Name = "Posts", URL = "/post/"}
 ]
 
 [params]
@@ -53,4 +53,4 @@ url = "https://twitter.com/neohsudroid"
 [params.utterances]
 repo = "NeoHsu/neohsu.github.io"
 issueTerm = "pathname"
-theme= "github-dark"
+theme= "github-light"
