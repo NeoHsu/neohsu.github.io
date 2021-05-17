@@ -1,6 +1,6 @@
 baseURL = "https://neohsu.github.io/"
-languageCode = "en"
-DefaultContentLanguage = "en"
+languageCode = "zh-tw"
+DefaultContentLanguage = "zh-tw"
 theme = "anatole"
 summarylength = 5
 enableEmoji = true
