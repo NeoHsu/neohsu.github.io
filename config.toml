@@ -28,6 +28,7 @@ contentratio = 0.7
 displayMode = "dark"
 googleSiteVerify="t0qlhlMvK4AFx4Vuu3778mSjl4ymmiLNZjx14mJ7u2Q"
 disableComments = false
+gtagId = "G-FCB9G1E569"
 
 ## Social links
 [[params.socialIcons]]
