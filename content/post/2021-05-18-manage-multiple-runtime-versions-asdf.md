@@ -5,7 +5,7 @@ categories:
 - asdf
 - NVM
 - runtime
-- Go
+- Golang
 - NodeJS
 ---
 
