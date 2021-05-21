@@ -4,6 +4,12 @@ date: 2021-05-19T14:47:44Z
 categories:
 - dotbot
 - dotfile
+- asdf
+- Tmux
+- Git
+- Antibody
+- Blackbox
+- HomeBrew
 ---
 ![screenshot for osx](https://raw.githubusercontent.com/NeoHsu/dotfiles/master/screenshot/osx_dotfile.png)
 
