@@ -1,6 +1,104 @@
-<!doctype html><html dir=ltr lang=zh-tw data-theme=dark><head><title>Neo Hsu | Manager dotfiles with dotbot</title><meta charset=utf-8><meta name=generator content="Hugo 0.83.1"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name=description content="Code wins arguments."><meta name=google-site-verification content="t0qlhlMvK4AFx4Vuu3778mSjl4ymmiLNZjx14mJ7u2Q"><link rel=stylesheet href=/css/main.min.b29fc5408bdb71afaf8c3736989fad5b879056ad6ee964a41a4cb79f2b5b381e.css integrity="sha256-sp/FQIvbca+vjDc2mJ+tW4eQVq1u6WSkGky3nytbOB4=" crossorigin=anonymous type=text/css><link rel=stylesheet href=/css/markupHighlight.min.f798cbda9aaa38f89eb38be6414bd082cfd71a6780375cbf67b6d2fb2b96491e.css integrity="sha256-95jL2pqqOPies4vmQUvQgs/XGmeAN1y/Z7bS+yuWSR4=" crossorigin=anonymous type=text/css><link rel=stylesheet href=/css/all.min.css integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin=anonymous><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=canonical href=/post/2021-05-19-manager-dotfiles-with-dotbot/><script type=text/javascript src=/js/anatole-header.min.0c05c0a90d28c968a1cad4fb31abd0b8e1264e788ccefed022ae1d3b6f627514.js integrity="sha256-DAXAqQ0oyWihytT7MavQuOEmTniMzv7QIq4dO29idRQ=" crossorigin=anonymous></script><script type=text/javascript src=/js/anatole-theme-switcher.min.7fd87181cdd7e8413aa64b6867bb32f3a8dc242e684fc7d5bbb9f600dbc2b6eb.js integrity="sha256-f9hxgc3X6EE6pktoZ7sy86jcJC5oT8fVu7n2ANvCtus=" crossorigin=anonymous></script><meta name=twitter:card content="summary"><meta name=twitter:title content="Manager dotfiles with dotbot"><meta name=twitter:description content="最近重新整理了一下自己的 dotfiles，自己認為 dotfiles 需要有幾個重點，
- 版本控制"></head><body><div class="sidebar animated fadeInDown"><div class=logo-title><div class=title><img src="http://www.gravatar.com/avatar/a6974d6335aac6400019a5bd307aeca8?s=500" alt="profile picture"><h3 title><a href=/>Learn Or Die</a></h3><div class=description><p>Code wins arguments.</p></div></div></div><ul class=social-links><li><a href=https://github.com/neohsu rel=me aria-label=GitHub><i class="fab fa-github fa-2x" aria-hidden=true></i></a></li><li><a href=https://www.linkedin.com/in/neohsu rel=me aria-label=Linkedin><i class="fab fa-linkedin fa-2x" aria-hidden=true></i></a></li><li><a href=https://www.facebook.com/NeoHsuDroid rel=me aria-label=Facebook><i class="fab fa-facebook fa-2x" aria-hidden=true></i></a></li><li><a href=https://twitter.com/neohsudroid rel=me aria-label=Twitter><i class="fab fa-twitter fa-2x" aria-hidden=true></i></a></li></ul><div class=footer><div class=by_farbox>&copy; Neo Hsu 2021</div></div></div><div class=main><div class="page-top animated fadeInDown"><a role=button class=navbar-burger data-target=navMenu aria-label=menu aria-expanded=false><span aria-hidden=true></span><span aria-hidden=true></span><span aria-hidden=true></span></a><ul class=nav id=navMenu><li><a href=/ title>Home</a></li><li><a href=/post/ title>Posts</a></li><li class=theme-switch-item><a class=theme-switch title="Switch Theme"><i class="fas fa-adjust fa-fw" aria-hidden=true></i></a></li></ul></div><div class=autopagerize_page_element><div class=content><div class="post animated fadeInDown"><div class=post-content><div class=post-title><h3>Manager dotfiles with dotbot</h3><div class=info><em class="fas fa-calendar-day"></em><span class=date>Wed, May 19, 2021</span>
-<em class="fas fa-stopwatch"></em><span class=reading-time>2-minute read</span></div></div><p><img src=https://raw.githubusercontent.com/NeoHsu/dotfiles/master/screenshot/osx_dotfile.png alt="screenshot for osx"></p><p>最近重新整理了一下自己的 <a href=https://github.com/NeoHsu/dotfiles>dotfiles</a>，自己認為 <strong>dotfiles</strong> 需要有幾個重點，</p><ul><li><strong>版本控制</strong><br>每次更改 dotfile 都需要有紀錄可以回朔，有些工具一開始設定後可能只是試驗性質，還沒融入自己的開發流程中，如果不習慣可以 rollback 回原本設定</li><li><strong>區隔 workspace</strong><br>能夠在不同 workspace 上對應到不同的 dotfile 設定，像是我們常常會有一些公司使用的特別工具設定，自己有時後會不想將這些特別設定混在自己的 dotfile 中，主要還是透過 folder 結構去做整體區隔</li><li><strong>轉移快速</strong><br>最好是能夠用ㄧ個指令就設定好所有的 dotfile 設定到新的機器中</li><li><strong>工具各司其職</strong><br>拿捏什麼類的工具用什麼東西來做管理，重新定義自己對於管理工具的處理方式</li></ul><p>以下是自己針對項目規劃自己的 <a href=https://github.com/NeoHsu/dotfiles>dotfiles</a></p><div class=highlight><pre class=chroma><code class=language-zsh data-lang=zsh>.
+<!doctype html><html dir=ltr lang=zh-tw data-theme=dark><head>
+<title> Neo Hsu | Manager dotfiles with dotbot </title>
+<meta charset=utf-8><meta name=generator content="Hugo 0.87.0"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name=description content="Code wins arguments.">
+<meta name=google-site-verification content="t0qlhlMvK4AFx4Vuu3778mSjl4ymmiLNZjx14mJ7u2Q">
+<link rel=stylesheet href=/css/main.min.b29fc5408bdb71afaf8c3736989fad5b879056ad6ee964a41a4cb79f2b5b381e.css integrity="sha256-sp/FQIvbca+vjDc2mJ+tW4eQVq1u6WSkGky3nytbOB4=" crossorigin=anonymous type=text/css>
+<link rel=stylesheet href=/css/markupHighlight.min.f798cbda9aaa38f89eb38be6414bd082cfd71a6780375cbf67b6d2fb2b96491e.css integrity="sha256-95jL2pqqOPies4vmQUvQgs/XGmeAN1y/Z7bS+yuWSR4=" crossorigin=anonymous type=text/css>
+<link rel=stylesheet href=/css/all.min.css integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin=anonymous>
+<link rel="shortcut icon" href=/favicon.ico type=image/x-icon>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=canonical href=/post/2021-05-19-manager-dotfiles-with-dotbot/>
+<script type=text/javascript src=/js/anatole-header.min.0c05c0a90d28c968a1cad4fb31abd0b8e1264e788ccefed022ae1d3b6f627514.js integrity="sha256-DAXAqQ0oyWihytT7MavQuOEmTniMzv7QIq4dO29idRQ=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/anatole-theme-switcher.min.7fd87181cdd7e8413aa64b6867bb32f3a8dc242e684fc7d5bbb9f600dbc2b6eb.js integrity="sha256-f9hxgc3X6EE6pktoZ7sy86jcJC5oT8fVu7n2ANvCtus=" crossorigin=anonymous></script>
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Manager dotfiles with dotbot">
+<meta name=twitter:description content="最近重新整理了一下自己的 dotfiles，自己認為 dotfiles 需要有幾個重點，
+ 版本控制">
+</head>
+<body><div class="sidebar animated fadeInDown">
+<div class=logo-title>
+<div class=title>
+<img src="http://www.gravatar.com/avatar/a6974d6335aac6400019a5bd307aeca8?s=500" alt="profile picture">
+<h3 title><a href=/>Learn Or Die</a></h3>
+<div class=description>
+<p>Code wins arguments.</p>
+</div>
+</div>
+</div>
+<ul class=social-links>
+<li>
+<a href=https://github.com/neohsu rel=me aria-label=GitHub>
+<i class="fab fa-github fa-2x" aria-hidden=true></i>
+</a>
+</li>
+<li>
+<a href=https://www.linkedin.com/in/neohsu rel=me aria-label=Linkedin>
+<i class="fab fa-linkedin fa-2x" aria-hidden=true></i>
+</a>
+</li>
+<li>
+<a href=https://www.facebook.com/NeoHsuDroid rel=me aria-label=Facebook>
+<i class="fab fa-facebook fa-2x" aria-hidden=true></i>
+</a>
+</li>
+<li>
+<a href=https://twitter.com/neohsudroid rel=me aria-label=Twitter>
+<i class="fab fa-twitter fa-2x" aria-hidden=true></i>
+</a>
+</li>
+</ul>
+<div class=footer>
+<div class=by_farbox>&copy; Neo Hsu 2021 </div>
+</div>
+</div>
+<div class=main>
+<div class="page-top animated fadeInDown">
+<a role=button class=navbar-burger data-target=navMenu aria-label=menu aria-expanded=false>
+<span aria-hidden=true></span>
+<span aria-hidden=true></span>
+<span aria-hidden=true></span>
+</a>
+<ul class=nav id=navMenu>
+<li><a href=/ title>Home</a></li>
+<li><a href=/post/ title>Posts</a></li>
+<li class=theme-switch-item>
+<a class=theme-switch title="Switch Theme">
+<i class="fas fa-adjust fa-fw" aria-hidden=true></i>
+</a>
+</li>
+</ul>
+</div>
+<div class=autopagerize_page_element>
+<div class=content>
+<div class="post animated fadeInDown">
+<div class=post-content>
+<div class=post-title>
+<h3>Manager dotfiles with dotbot</h3>
+<div class=info>
+<em class="fas fa-calendar-day"></em>
+<span class=date> Wed, May 19, 2021
+</span>
+<em class="fas fa-stopwatch"></em>
+<span class=reading-time>2-minute read</span>
+</div>
+</div>
+<p><img src=https://raw.githubusercontent.com/NeoHsu/dotfiles/master/screenshot/osx_dotfile.png alt="screenshot for osx"></p>
+<p>最近重新整理了一下自己的 <a href=https://github.com/NeoHsu/dotfiles>dotfiles</a>，自己認為 <strong>dotfiles</strong> 需要有幾個重點，</p>
+<ul>
+<li><strong>版本控制</strong><br>
+每次更改 dotfile 都需要有紀錄可以回朔，有些工具一開始設定後可能只是試驗性質，還沒融入自己的開發流程中，如果不習慣可以 rollback 回原本設定</li>
+<li><strong>區隔 workspace</strong><br>
+能夠在不同 workspace 上對應到不同的 dotfile 設定，像是我們常常會有一些公司使用的特別工具設定，自己有時後會不想將這些特別設定混在自己的 dotfile 中，主要還是透過 folder 結構去做整體區隔</li>
+<li><strong>轉移快速</strong><br>
+最好是能夠用ㄧ個指令就設定好所有的 dotfile 設定到新的機器中</li>
+<li><strong>工具各司其職</strong><br>
+拿捏什麼類的工具用什麼東西來做管理，重新定義自己對於管理工具的處理方式</li>
+</ul>
+<p>以下是自己針對項目規劃自己的 <a href=https://github.com/NeoHsu/dotfiles>dotfiles</a></p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-zsh data-lang=zsh>.
 ├─ .blackbox/
 ├─ asdf
 ├─ dotbot
@@ -31,39 +129,75 @@
 ├─ tool-versions
 ├─ install.conf.yaml
 └─ install
-</code></pre></div><p>這邊就一一介紹一下大致上使用的工具吧！</p><h2 id=dotbot>dotbot</h2><p>這是一套協助將 dotfile 放置到 $HOME 目錄中的工具，主要透過 <strong>install.conf.yml</strong> 檔案設定，
-透過設定檔去配置你的 dotfile 放置到哪個位置。</p><p>在使用 <a href=https://github.com/anishathalye/dotbot>dotbot</a> 之前，自己曾經是用過 <a href=https://yadm.io/>yadm</a> 來管理 dotfile，
+</code></pre></div><p>這邊就一一介紹一下大致上使用的工具吧！</p>
+<h2 id=dotbot>dotbot</h2>
+<p>這是一套協助將 dotfile 放置到 $HOME 目錄中的工具，主要透過 <strong>install.conf.yml</strong> 檔案設定，
+透過設定檔去配置你的 dotfile 放置到哪個位置。</p>
+<p>在使用 <a href=https://github.com/anishathalye/dotbot>dotbot</a> 之前，自己曾經是用過 <a href=https://yadm.io/>yadm</a> 來管理 dotfile，
 兩者在設計上有點不一樣，在 yadm 中是將你的 $HOME 目錄下當作一個 repo，當你想要更改或加入設定的時候，透過簡單的類似 Git 指令去做相關操作，
-其實底層就是用 Git 去運作。</p><p>一開始覺得很方便，不需要特別去規劃整個 folder 架構就可以直接做管理，<br>不過後續需要從比較廣的角度來管理重構自己的 dotfile 的時候反而不太容易，<br>譬如我想要在一個 editor 開啟所有 dotfile 設定的時候，他因為是直接把 $HOME 目錄當做整體的 repo，這時候我就會看到蠻多不屬於 dotfile 的檔案，
-當時唯一解法就是 clone 下我之前設定的 dotfile 開啟來看&mldr;這有點土砲的作法。</p><p>後續看到 <a href=https://github.com/anishathalye/dotbot>dotbot</a> 這工具，
+其實底層就是用 Git 去運作。</p>
+<p>一開始覺得很方便，不需要特別去規劃整個 folder 架構就可以直接做管理，<br>
+不過後續需要從比較廣的角度來管理重構自己的 dotfile 的時候反而不太容易，<br>
+譬如我想要在一個 editor 開啟所有 dotfile 設定的時候，他因為是直接把 $HOME 目錄當做整體的 repo，這時候我就會看到蠻多不屬於 dotfile 的檔案，
+當時唯一解法就是 clone 下我之前設定的 dotfile 開啟來看&mldr;這有點土砲的作法。</p>
+<p>後續看到 <a href=https://github.com/anishathalye/dotbot>dotbot</a> 這工具，
 他主要是透過一個專案的 repo 去管理你的所有 dotfile，
 透過設定檔去放置你的 dotfile ，主要用 link 去做處理，
 瞬間在管理上就順手多了，
 其實如果自己本身有要整理和管理 dotfile 檔案，其實不太需要飄逸管理的 <a href=https://yadm.io/>yadm</a> ，
-因為你本來就想要有組值得做這件事情了</p><h2 id=asdf>asdf</h2><p>一個多語言的 runner engine 的管理工具，類似 gvm, nvm&mldr;的工具，
+因為你本來就想要有組值得做這件事情了</p>
+<h2 id=asdf>asdf</h2>
+<p>一個多語言的 runner engine 的管理工具，類似 gvm, nvm&mldr;的工具，
 這邊關於工具操作的介紹在我之前的文章有提到過 <a href=/post/2021-05-18-manage-multiple-runtime-versions-asdf>MANAGE MULTIPLE RUNTIME VERSIONS - ASDF</a>，
 這邊再補充一下其實目前在 asdf encosystem 的發展下，該工具已經不在指是針對 runtime engine 的版本管理了，
 目前也開始有開發者協助幫忙支援一些 CLI tools 的安裝，有點類似 MacOS 中的 HomeBrew 的感覺，
 但是自己是認為還是將 asdf 當作 runner engine 管理版本的工具就好，
 畢竟它和 homebrew 的運作方式不同，沒有對應到 linux 相關的系統結構，
 因此有些系統工具運作上不確定會不會有點問題，
-還是先單純化 asdf 工具的使用吧</p><h2 id=blackbox>blackbox</h2><p>一個用 GPG 加解密檔案的工具，可以利用 blackbox 提供的 script 去做檔案加解密，用來保護自己的一些機敏資料</p><h2 id=gitrc>gitrc</h2><p>這邊是設定 global gitconfig 的操作，主要透過 includeif 的指令去區隔不同目錄下 gitconfig 設定，
+還是先單純化 asdf 工具的使用吧</p>
+<h2 id=blackbox>blackbox</h2>
+<p>一個用 GPG 加解密檔案的工具，可以利用 blackbox 提供的 script 去做檔案加解密，用來保護自己的一些機敏資料</p>
+<h2 id=gitrc>gitrc</h2>
+<p>這邊是設定 global gitconfig 的操作，主要透過 includeif 的指令去區隔不同目錄下 gitconfig 設定，
 關於 git includeif 的介紹之前有文章提到過 <a href=/post/2021-05-10-git-config-includeif>INCLUDEIF OF GIT CONFIG</a>
-可以參考之前文章的說明</p><div class=highlight><pre class=chroma><code class=language-zsh data-lang=zsh><span class=c1># include zsh config</span>
+可以參考之前文章的說明</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-zsh data-lang=zsh><span class=c1># include zsh config</span>
 <span class=k>for</span> file in <span class=s2>&#34;</span><span class=nv>$HOME</span><span class=s2>&#34;</span>/.zsh/**/*.zsh
 <span class=k>do</span>
   <span class=nb>source</span> <span class=s2>&#34;</span><span class=nv>$file</span><span class=s2>&#34;</span>
 <span class=k>done</span>
-</code></pre></div><h2 id=antibody>antibody</h2><p>目前使用 antibody 去作為 zsh 的 plugin 管理工具，在 zsh_plugin 中設定安裝 zsh 所需的套件，
+</code></pre></div><h2 id=antibody>antibody</h2>
+<p>目前使用 antibody 去作為 zsh 的 plugin 管理工具，在 zsh_plugin 中設定安裝 zsh 所需的套件，
 在 theme 我是使用 p10k 的 theme，
 並透過 folder 去區隔 zsh 的一些 aliases, export 和 functions 的使用，
 也可以區隔工作用的 zsh 指令，
-透過下面指令去 source 資料夾下的 zsh 設定</p><div class=highlight><pre class=chroma><code class=language-zsh data-lang=zsh><span class=c1># include zsh config</span>
+透過下面指令去 source 資料夾下的 zsh 設定</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-zsh data-lang=zsh><span class=c1># include zsh config</span>
 <span class=k>for</span> file in <span class=s2>&#34;</span><span class=nv>$HOME</span><span class=s2>&#34;</span>/.zsh/**/*.zsh
 <span class=k>do</span>
   <span class=nb>source</span> <span class=s2>&#34;</span><span class=nv>$file</span><span class=s2>&#34;</span>
 <span class=k>done</span>
-</code></pre></div><h2 id=homebrew>HomeBrew</h2><p>HomeBrew 是在 MacOS 上常見的第三方套件安裝工具也包含一些 GUI App 的安裝也可以使用，
+</code></pre></div><h2 id=homebrew>HomeBrew</h2>
+<p>HomeBrew 是在 MacOS 上常見的第三方套件安裝工具也包含一些 GUI App 的安裝也可以使用，
 Brewfile 是透過 HomeBrew bundle 備份下來的套件列表，
-可以透過 HomeBrew bundle 去快速恢復之前安裝的套件</p><p>以上就是簡單介紹自己的 dotfile 設定，
-希望能幫助到大家管理自己的 dotfile.</p></div><div class=post-footer><div class=info><span class=separator><a class=category href=/categories/dotbot/>dotbot</a><a class=category href=/categories/dotfile/>dotfile</a><a class=category href=/categories/asdf/>asdf</a><a class=category href=/categories/tmux/>Tmux</a><a class=category href=/categories/git/>Git</a><a class=category href=/categories/antibody/>Antibody</a><a class=category href=/categories/blackbox/>Blackbox</a><a class=category href=/categories/homebrew/>HomeBrew</a></span></div></div><div id=fb_comments_container><h2>comments</h2><script src=https://utteranc.es/client.js repo=NeoHsu/neohsu.github.io issue-term=pathname theme=github-light crossorigin=anonymous async></script></div></div></div></div></div><script type=text/javascript src=/js/medium-zoom.min.83cb1dd5fea8d42d87d1e601a07faa73089ad0ef9ccfe5daf6041289ebcc4e46.js integrity="sha256-g8sd1f6o1C2H0eYBoH+qcwia0O+cz+Xa9gQSievMTkY=" crossorigin=anonymous></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-FCB9G1E569"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-FCB9G1E569')</script></body></html>
+可以透過 HomeBrew bundle 去快速恢復之前安裝的套件</p>
+<p>以上就是簡單介紹自己的 dotfile 設定，
+希望能幫助到大家管理自己的 dotfile.</p>
+</div>
+<div class=post-footer>
+<div class=info>
+<span class=separator><a class=category href=/categories/dotbot/>dotbot</a><a class=category href=/categories/dotfile/>dotfile</a><a class=category href=/categories/asdf/>asdf</a><a class=category href=/categories/tmux/>Tmux</a><a class=category href=/categories/git/>Git</a><a class=category href=/categories/antibody/>Antibody</a><a class=category href=/categories/blackbox/>Blackbox</a><a class=category href=/categories/homebrew/>HomeBrew</a></span>
+</div>
+</div>
+<div id=fb_comments_container>
+<h2>comments</h2>
+<script src=https://utteranc.es/client.js repo=NeoHsu/neohsu.github.io issue-term=pathname theme=github-light crossorigin=anonymous async></script>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script type=text/javascript src=/js/medium-zoom.min.83cb1dd5fea8d42d87d1e601a07faa73089ad0ef9ccfe5daf6041289ebcc4e46.js integrity="sha256-g8sd1f6o1C2H0eYBoH+qcwia0O+cz+Xa9gQSievMTkY=" crossorigin=anonymous></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FCB9G1E569"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-FCB9G1E569')</script></body>
+</html>
