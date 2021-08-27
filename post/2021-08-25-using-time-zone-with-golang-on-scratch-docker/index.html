@@ -136,7 +136,9 @@
 	<span class=s>&#34;/usr/lib/locale/TZ/&#34;</span><span class=p>,</span>
 	<span class=nx>runtime</span><span class=p>.</span><span class=nf>GOROOT</span><span class=p>()</span> <span class=o>+</span> <span class=s>&#34;/lib/time/zoneinfo.zip&#34;</span><span class=p>,</span>
 <span class=p>}</span>
-</code></pre></div><p>而再更上層一點的 <a href=https://golang.org/src/time/zoneinfo.go>Golang zoneinfo 的 source code </a> 中，<br>
+</code></pre></div><p>從上面看到 source path 並沒有在 docker scratch image 上被設定，<br>
+我們可以在對應位置中放入對應的 timezone info 可以解決這樣的問題，<br>
+而我們再更上層一點的 <a href=https://golang.org/src/time/zoneinfo.go>Golang zoneinfo 的 source code </a> 中，<br>
 我們可以知道 Golang 會預設 <strong>ENV ZONEINFO</strong> 指定路徑為 <strong>$GOROOT/lib/time/zoneinfo.zip</strong>，<br>
 <strong>zoneinfo.zip</strong> 是 Golang 自帶的 TimeZone 資訊，主要放在 time library 中，<br>
 因此我們可以達到一些解決方案:</p>
